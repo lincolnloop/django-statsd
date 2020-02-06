@@ -191,13 +191,13 @@ class TestClient(unittest.TestCase):
         eq_(list(client.socket.payloads), [])
 
         client.incr('testing')
-        eq_(client.socket.recv(), 'testing:1|c')
+        assert client.socket.recv().startswith('testing:1|c')
 
         client.decr('testing')
-        eq_(client.socket.recv(), 'testing:-1|c')
+        assert client.socket.recv().startswith('testing:-1|c')
 
         client.timing('testing', 8)
-        eq_(client.socket.recv(), 'testing:8|ms')
+        assert client.socket.recv().startswith('testing:8|ms')
 
 
 class TestMetlogClient(TestCase):
