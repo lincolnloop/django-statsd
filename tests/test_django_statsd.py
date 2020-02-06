@@ -84,10 +84,7 @@ class TestIncr(TestCase):
 
     def test_graphite_response_authenticated(self, incr):
         self.req.user = mock.Mock()
-        if DJANGO_VERSION < (1, 10):
-            self.req.user.is_authenticated.return_value = True
-        else:
-            self.req.user.is_authenticated = True
+        self.req.user.is_authenticated = True
         gmw = middleware.GraphiteMiddleware()
         gmw.process_response(self.req, self.res)
         eq_(incr.call_count, 2)
@@ -99,10 +96,7 @@ class TestIncr(TestCase):
 
     def test_graphite_exception_authenticated(self, incr):
         self.req.user = mock.Mock()
-        if DJANGO_VERSION < (1, 10):
-            self.req.user.is_authenticated.return_value = True
-        else:
-            self.req.user.is_authenticated = True
+        self.req.user.is_authenticated = True
         gmw = middleware.GraphiteMiddleware()
         gmw.process_exception(self.req, None)
         eq_(incr.call_count, 2)
