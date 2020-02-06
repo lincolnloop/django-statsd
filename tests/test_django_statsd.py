@@ -8,10 +8,7 @@ from django.conf import settings
 from nose.exc import SkipTest
 from nose import tools as nose_tools
 
-try:
-    from django.urls import reverse
-except ImportError:
-    from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django import VERSION as DJANGO_VERSION
 from django.http import HttpResponse, HttpResponseForbidden
 from django.test import TestCase
