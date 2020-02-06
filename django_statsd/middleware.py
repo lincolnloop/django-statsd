@@ -4,15 +4,9 @@ import time
 from django import VERSION as DJANGO_VERSION
 from django.conf import settings
 from django.http import Http404
+from django.utils.deprecation import MiddlewareMixin
 
 from django_statsd.clients import statsd
-
-
-try:
-    from django.utils.deprecation import MiddlewareMixin
-except ImportError:
-    class MiddlewareMixin(object):
-        pass
 
 
 class GraphiteMiddleware(MiddlewareMixin):

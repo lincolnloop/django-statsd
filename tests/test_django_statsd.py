@@ -338,16 +338,6 @@ class TestMetlogClient(TestCase):
             eq_(msg['type'], 'counter')
 
 
-def patch_middleware(klass):
-    if DJANGO_VERSION < (1, 10):
-        # This is primarily for Zamboni, which loads in the custom middleware
-        # classes, one of which, breaks posts to our url. Let's stop that.
-        return mock.patch.object(settings, 'MIDDLEWARE_CLASSES', [])(klass)
-
-    return klass
-
-
-@patch_middleware
 class TestRecord(TestCase):
 
     urls = 'django_statsd.urls'
